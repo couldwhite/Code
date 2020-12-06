@@ -54,7 +54,7 @@ public class YourSolver extends AbstractJsonSolver<Board> {
     }
 
     private List<Command> getAnswerList(Board board) {
-        System.out.println("Зашел в дефолтный метод");
+        System.out.println("Поменялся на гитхабе");
         List<Command> result = new ArrayList<Command>();
 //лист пустых точек
         List<Point> freePoint = board.getGlass().getFreeSpace();
@@ -112,7 +112,9 @@ public class YourSolver extends AbstractJsonSolver<Board> {
                 result = rotateZ.rotateZ(freePoint, curY,board,0);
                 break;
             case "T":
-                result.add(Command.DOWN);
+                System.out.println("T");
+                rotateT = new RotateT(curY, freePoint, board);
+                result = rotateT.rotateT(freePoint, curY,board,0);
                 break;
         }
 
