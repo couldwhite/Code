@@ -126,7 +126,7 @@ public class YourSolver extends AbstractJsonSolver<Board> {
 
     public static void main(String[] args) {
         WebSocketRunner.runClient(
-                "http://codebattle2020.westeurope.cloudapp.azure.com/codenjoy-contest/board/player/inzd95jjyrgtqvycqkfn?code=4284612925459180178&gameName=tetris",
+                "http://codebattle2020.westeurope.cloudapp.azure.com/codenjoy-contest/board/player/7s1g4qdhzs4jhtty5gv5?code=1413138309415839074",
                 new YourSolver(new RandomDice()),
                 new Board());
     }
