@@ -54,7 +54,7 @@ public class YourSolver extends AbstractJsonSolver<Board> {
     }
 
     private List<Command> getAnswerList(Board board) {
-        System.out.println("Поменялся на гитхабе");
+        System.out.println("Поменялся на гитхабе1");
         List<Command> result = new ArrayList<Command>();
 //лист пустых точек
         List<Point> freePoint = board.getGlass().getFreeSpace();
