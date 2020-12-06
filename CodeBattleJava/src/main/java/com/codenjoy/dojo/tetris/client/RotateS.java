@@ -35,17 +35,25 @@ public class RotateS {
     PointImpl badPoint0;
     PointImpl badPoint90;
 
+    PointImpl badPoint1;
+    PointImpl badPoint2;
+
+    PointImpl badPoint3;
+    PointImpl badPoint4;
+
+    PointImpl badPoint5;
+    PointImpl badPoint6;
+
+
     public List<Command> rotateS(List<Point> freePoint, int curY, Board board, int k){
         int i;
         int distance;
-        boolean flag = false;
         List<Command> result = new ArrayList<Command>();
         curFreePoints = new LinkedList<>();
         for (Point points : freePoint) {
             if (points.getY() == curY) curFreePoints.add(points);
         }
         for( i = k; i < curFreePoints.size(); i++){
-            flag=true;
             curFreePoint = (PointImpl) curFreePoints.get(i);
             curPoint = (PointImpl) board.getCurrentFigurePoint();
             int curFreeX = curFreePoint.getX();
@@ -89,12 +97,13 @@ public class RotateS {
                 return rotateS(freePoint, curY + 1, board, 0);
             }
         }
-        if (!flag) {
-            return rotateS(freePoint, curY + 1, board, 0);
-        }
         return result;
     }
     public int isPossibleRotate(List<Point> curFreePoints, List<Point> freePoint, PointImpl curFreePoint){
+
+        badPoint1 = (PointImpl) new PointImpl(curFreePoint.getX(), curFreePoint.getY() - 1);
+        badPoint2 = (PointImpl) new PointImpl(curFreePoint.getX() - 1, curFreePoint.getY() - 1);
+
         for(int i = 0; i < 2; i++){
             flags[i] = false;
         }
@@ -102,27 +111,31 @@ public class RotateS {
             num[i] = 0;
         }
 
-            point1 = (PointImpl) new PointImpl(curFreePoint.getX()-1, curFreePoint.getY());
-            point2 = (PointImpl) new PointImpl(curFreePoint.getX(), curFreePoint.getY() +1);
-            point3 = (PointImpl) new PointImpl(curFreePoint.getX() + 1, curFreePoint.getY()+1);
+        point1 = (PointImpl) new PointImpl(curFreePoint.getX()-1, curFreePoint.getY());
+        point2 = (PointImpl) new PointImpl(curFreePoint.getX(), curFreePoint.getY() +1);
+        point3 = (PointImpl) new PointImpl(curFreePoint.getX() + 1, curFreePoint.getY()+1);
 
-            if(freePoint.contains(point1) && freePoint.contains(point2) && freePoint.contains(point3)) flags[0] = true;
+        badPoint0 = (PointImpl) new PointImpl(curFreePoint.getX()+1 , curFreePoint.getY());
+        if(freePoint.contains(point1)
+                && freePoint.contains(point2)
+                && freePoint.contains(point3)
+                && freePoint.contains(badPoint0)
+                && !freePoint.contains(badPoint1)
+                && !freePoint.contains(badPoint2)) flags[0] = true;
 
-            badPoint0 = (PointImpl) new PointImpl(curFreePoint.getX()-1 , curFreePoint.getY() + 1);
-        if (!freePoint.contains(badPoint0)){
-            num[0]++;
-        }
 
-            point901 = (PointImpl) new PointImpl(curFreePoint.getX(), curFreePoint.getY()+1);
-            point902 = (PointImpl) new PointImpl(curFreePoint.getX() - 1, curFreePoint.getY() + 1);
-            point903 = (PointImpl) new PointImpl(curFreePoint.getX() - 1, curFreePoint.getY() + 2);
 
-            if(freePoint.contains(point901) && freePoint.contains(point902) && freePoint.contains(point903)) flags[1] = true;
+        point901 = (PointImpl) new PointImpl(curFreePoint.getX(), curFreePoint.getY()+1);
+        point902 = (PointImpl) new PointImpl(curFreePoint.getX() - 1, curFreePoint.getY() + 1);
+        point903 = (PointImpl) new PointImpl(curFreePoint.getX() - 1, curFreePoint.getY() + 2);
+
+        if(freePoint.contains(point901) && freePoint.contains(point902) && freePoint.contains(point903)) flags[1] = true;
         badPoint90 = (PointImpl) new PointImpl(curFreePoint.getX()+1 , curFreePoint.getY() + 1);
         if (!freePoint.contains(badPoint90)){
             num[1]++;
         }
         System.out.println("флаг 0: " + flags[0] +" флаг 90: " + flags[1] );
+
         System.out.println("Точка "+badPoint0.getX()+" "+badPoint0.getY());
         System.out.println("num для 0 "+ num[0]+ " num 90 "+num[1]);
         if(flags[0]&&num[0]==0){
